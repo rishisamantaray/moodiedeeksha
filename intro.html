@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deeksha's Mood Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #da8ecb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #333;
+        }
+        .card-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            width: 120px;
+            height: 150px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.1);
+        }
+        .card p {
+            font-size: large;
+            font-weight: bolder;
+            color: #0e0303;
+            text-align: center;
+        }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+        .popup-content h2 {
+            margin: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .popup-content iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            border: none;
+        }
+        .popup-content button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .popup-content button:hover {
+            background-color: #0056b3;
+        }
+
+		#card-happy{
+            background-image: url('happy1.jpg');
+            background-size: cover;
+        }
+        #card-excited {
+            background-image: url('excited.jpg');
+            background-size: cover;
+        }
+        #card-romantic {
+            background-image: url('romantic.jpg');
+            background-size: cover;
+        }
+        #card-calm {
+            background-image: url('calm.jpg');
+            background-size: cover;
+        }
+        #card-shy {
+            background-image: url('shy.jpg');
+            background-size: cover;
+        }        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Deeksha's Mood Selector</h1>
+    </header>
+    <h3>click any of the cards as per your mood, Deeksha.</h3>
+    <div class="card-container">
+        <div class="card" id="card-happy" data-mood="Happy" data-video="https://www.youtube.com/embed/2pRLL2zl3m4">
+            <p>Happy</p>
+        </div>
+        <div class="card"  id="card-excited" data-mood="Excited" data-video="https://www.youtube.com/embed/OpNJG0Vs9lw">
+            <p>Excited</p>
+        </div>
+        <div class="card" id="card-romantic" data-mood="Romantic" data-video="https://www.youtube.com/embed/hAdwtHcLDTw">
+            <p>Romantic</p>
+        </div>
+        <div class="card" id="card-calm" data-mood="Calm" data-video="https://www.youtube.com/embed/oSdMPYxNAWU">
+            <p>Calm</p>
+        </div>
+        <div class="card" id="card-shy" data-mood="Calm" data-video="https://www.youtube.com/embed/Oo5tqEWm-jM">
+            <p>Shy</p>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2 id="popupText"></h2>
+            <iframe id="popupVideo" allow="autoplay" allowfullscreen></iframe>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+        const popup = document.getElementById('popup');
+        const popupText = document.getElementById('popupText');
+        const popupVideo = document.getElementById('popupVideo');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const mood = card.getAttribute('data-mood');
+                const videoSrc = card.getAttribute('data-video');
+
+                popupText.textContent = `Deeksha is feeling ${mood}!`;
+                popupVideo.src = `${videoSrc}?autoplay=1`;
+                popup.style.display = 'flex';
+            });
+        });
+
+        function closePopup() {
+            popup.style.display = 'none';
+            popupVideo.src = ""; // Stop the video
+        }
+    </script>
+</body>
+</html>
